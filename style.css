@@ -20,6 +20,7 @@
     height: 50px;
     background-color: lightseagreen;
     border-radius: 5px;
+    padding-right: 5px;
 }
 
 .pad{
@@ -27,7 +28,7 @@
     flex-wrap: wrap;
     margin: auto;
     width: 300px;
-    gap: 8px
+    gap: 8px;
 
 }
 
@@ -41,6 +42,7 @@ button{
     align-items: center;
     justify-content: center;
     border: none;  
+    box-shadow: 2px 2px whitesmoke;
 }
 
 #evaluate{
