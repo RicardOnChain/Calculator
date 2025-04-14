@@ -17,6 +17,9 @@ document.querySelector(".pad").addEventListener("click", (e) => {
 
     switch (e.target.id){
         case "number":
+            if (e.target.innerText == "." && displayList1.includes(".") && frstTimeOperator == true) {break}
+            if (e.target.innerText == "." && displayList2.includes(".")) {break}
+
             if (endedEvaluation == true) {clear()}
 
             if (isThisVar1 == true){
@@ -143,6 +146,7 @@ function backspace(){
     } else if (isThisVar1 == false && displayList2.length == 0){
         operator=""
         isThisVar1 = true
+        frstTimeOperator = true
     }
     display(operator)
 
@@ -156,16 +160,34 @@ function per100(){
         displayList1=[(var1 / 100)]
 
     } else if (isThisVar1 == false && displayList2.length != 0){
-        var1= parseFloat(displayList1.join(""))      
-        var2= parseFloat(displayList2.join(""))   
+        var1= parseFloat(displayList1.join(""))  
+        var2= parseFloat(displayList2.join(""))  
         displayList2.push("%")
-        display(operator)   
-        displayList2=[var1*(var2 / 100)]
+        display(operator)
+        switch (operator){   
+            case "+":
+            displayList2=[var1*(var2 / 100)]
+            
+            case "-":
+            displayList2=[var1*(var2 / 100)]
+            break
+
+            case "x":
+            displayList2=[(var2 / 100)]
+            break
+            
+            case "/":
+            displayList2=[(var2 / 100)]
+            break
+        }
 
     } else if (isThisVar1 == false && displayList2.length == 0){
         var1= parseFloat(displayList1.join(""))
         displayList1.push("%")
-        display(operator)   
+        if(endedEvaluation == true) {
+            operator=""
+            display()
+        } else {display(operator)}   
         displayList1=[(var1 / 100)]      
 
     }
@@ -174,7 +196,7 @@ function per100(){
 }
 
 function display(operator=""){
-    displayRef.innerText = (displayList1.join("")+ operator +displayList2.join(""));
+    displayRef.innerText = (displayList1.join("")+ " " + operator + " " +displayList2.join(""));
 }
 
 function operation(a,b,operator){
@@ -193,7 +215,7 @@ function operation(a,b,operator){
             divide(a,b)
             break
     
-    scndTimeNr=False
+    isThisVar1=true
     var1=output
     var2=undefined
     
