@@ -1,8 +1,22 @@
+@font-face {
+    font-family: 'Octosquares';
+    src: url('fonts/TT\ Octosquares\ Trial\ Condensed\ ExtraLight.ttf') format('truetype'); /* or 'truetype' if it's a .ttf */
+    font-weight: normal;
+    font-style: normal;
+  }
+
+
+body{
+    background-color: #84E296;
+    color: #333333;
+    font-family: "Octosquares";
+    font-size: 25px;
+}
 
 .frame{
-    background-color: black;
-    margin: 200px auto;
-    width: 350px;
+    background-color: #333333;
+    margin: 100px auto 0px;
+    width: 340px;
     padding-top: 25px;
     padding-bottom: 25px;
     display: flex;
@@ -10,22 +24,26 @@
     align-items: center;
     gap: 20px;
     border-radius: 20px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
 }
 
 .display{
     display: flex;
     align-items: center;
-    justify-content: end;
-    width: 300px;
-    height: 50px;
-    background-color: lightseagreen;
+    justify-content: end; 
+    width: 285px;
+    height: 75px;
+    background-color: #7E8D85;
     border-radius: 5px;
-    padding-right: 5px;
+    padding-right: 10px;
+    font-family: "Octosquares";
+    font-size: 25px;
 }
 
 .pad{
     display: flex;
     flex-wrap: wrap;
+    align-items: start;
     margin: auto;
     width: 300px;
     gap: 8px;
@@ -33,7 +51,7 @@
 }
 
 button{
-    background-color: burlywood;
+    background-color: #7E8D85;
     flex: 1 1 auto;
     aspect-ratio: 1/1;
     width: 60px;
@@ -42,12 +60,40 @@ button{
     align-items: center;
     justify-content: center;
     border: none;  
-    box-shadow: 2px 2px whitesmoke;
+    box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.6);
+    color: #333333;
+    transition: all 0.3s ease;
+    font-family: "Octosquares";
+    font-size: 20px;
+    font-weight: 1500;
 }
 
-#evaluate{
+button:hover{
+    transform:translateY(-3px);
+    background-color: #84E296;
+}
+
+button:active{
+    transform: translateY(1px);
+    
+}
+
+#Enter{
     flex: 2 1 120px;
     border-radius: 40px;
     aspect-ratio: 2/1;
 }
 
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    gap: 5px;
+    font-size: 15px;
+}
+
+.github-logo{
+    flex: 0 0 10px;
+    width: 20px;
+    
+}

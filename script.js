@@ -13,22 +13,36 @@ const displayRef=document.querySelector(".display")
 
 //Event Listeners
 
-document.querySelector(".pad").addEventListener("click", (e) => {
+document.querySelector(".pad").addEventListener("click", (e) => getInput(e))
 
-    switch (e.target.id){
+document.querySelector("body").addEventListener("keydown", (e) => getInput(e))
+
+
+function getInput(e){
+    let value
+    if (e.type=="click") {
+        logicToValidate=e.target.className   
+        value = e.target.innerText
+    
+    }else if (e.type="keydown" && document.querySelector("#" + CSS.escape(e.key)) != null) {
+            logicToValidate=document.querySelector("#" + CSS.escape(e.key)).className
+            value = e.key
+    }
+
+    switch (logicToValidate){
         case "number":
-            if (e.target.innerText == "." && displayList1.includes(".") && frstTimeOperator == true) {break}
-            if (e.target.innerText == "." && displayList2.includes(".")) {break}
+            if (value == "." && displayList1.includes(".") && frstTimeOperator == true) {break}
+            if (value == "." && displayList2.includes(".")) {break}
 
             if (endedEvaluation == true) {clear()}
 
             if (isThisVar1 == true){
-                displayList1.push(e.target.innerText)
+                displayList1.push(value)
                 display()
                 break
             
             } else {
-                displayList2.push(e.target.innerText)
+                displayList2.push(value)
                 display(operator)
                 break
             }
@@ -37,14 +51,14 @@ document.querySelector(".pad").addEventListener("click", (e) => {
             
             endedEvaluation=false
             
-            if ((e.target.innerText=="+" || e.target.innerText=="-") && Number.isNaN(parseFloat(displayList1.join("")))  ){
-                displayList1[0]=e.target.innerText
+            if ((value=="+" || value=="-") && Number.isNaN(parseFloat(displayList1.join("")))  ){
+                displayList1[0]=value
                 display()
                 break
                 }
             
             if (displayList2.length == 0){                                      // save var1 and reset display list 
-                operator=e.target.innerText                                            //when operator is introduced for the first time and numbers have already been introduced
+                operator=value                                            //when operator is introduced for the first time and numbers have already been introduced
                 display(operator)
             
                 isThisVar1=false
@@ -56,7 +70,7 @@ document.querySelector(".pad").addEventListener("click", (e) => {
                 var2= parseFloat(displayList2.join(""))                            //save var2 if an operator is pressed for a 2nd time and numbers have already been introduced
                 operation (var1,var2,operator)
 
-                operator=e.target.innerText
+                operator=value
                 display(operator)
                 break
               
@@ -83,7 +97,7 @@ document.querySelector(".pad").addEventListener("click", (e) => {
         case "perCent":
             per100()
             break
-}})
+}}
 
 
 
@@ -93,7 +107,7 @@ function add(a, b) {
     output = a + b
     displayList1=[]
     displayList2=[]
-    displayList1.push(output)
+    displayList1.push(parseFloat(output.toFixed(3)))
     display()
 }
 
@@ -101,7 +115,7 @@ function subtract(a, b) {
     output = a - b;
     displayList1=[]
     displayList2=[]
-    displayList1.push(output)
+    displayList1.push(parseFloat(output.toFixed(3)))
     display()
     
 }
@@ -109,7 +123,7 @@ function multiply(a, b) {
     output = a * b;
     displayList1=[]
     displayList2=[]
-    displayList1.push(output)
+    displayList1.push(parseFloat(output.toFixed(3)))
     display()
     
 }
@@ -122,7 +136,7 @@ function divide(a, b) {
     }
     displayList1=[]
     displayList2=[]
-    displayList1.push(output)
+    displayList1.push(parseFloat(output.toFixed(3)))
     display()
 
 }
@@ -221,3 +235,5 @@ function operation(a,b,operator){
     
     }
 }
+
+document.querySelector("p").innerText = (new Date().getFullYear()) + " RicardOnChain © "
